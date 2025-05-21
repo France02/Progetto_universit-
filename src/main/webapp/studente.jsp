@@ -16,7 +16,7 @@ String matricola=(String)session.getAttribute("matricola");
 ResultSet res=(ResultSet) request.getAttribute("tabella_corso");
 ResultSet res1=(ResultSet) request.getAttribute("elenco_appelli");
 String materia=(String) request.getAttribute("materia");
-String messaggio = (String) request.getAttribute("successo"); // Questo Ã¨ il messaggio di successo generico
+String messaggio = (String) request.getAttribute("successo"); // Questo è il messaggio di successo generico
 String data = (String) request.getAttribute("data");
 String materia2 = (String) request.getAttribute("materia2");
 %>

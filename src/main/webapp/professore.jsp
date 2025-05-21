@@ -29,7 +29,7 @@ String Data= (String)request.getAttribute("Data");
     <a href="logout.jsp" class="logout-link">logout</a>
 </div>
 
-<%-- Questo Ã¨ per il messaggio generico (se presente) che potresti voler stilizzare come 'general-message' --%>
+<%-- Questo è per il messaggio generico (se presente) che potresti voler stilizzare come 'general-message' --%>
 <%-- String messaggioGenerico = (String) request.getAttribute("messaggioGenerico");
 if(messaggioGenerico != null) { %>
     <p class="general-message"><%= messaggioGenerico %></p>
@@ -38,7 +38,7 @@ if(messaggioGenerico != null) { %>
 
 <div class="main-content-container">
 
-    <% if(appelli!=null){%>
+    <% if(appelli!=null){	%>
     <p class="section-title">Per la sua materia: "<%=materia %>" sono disponibili i seguenti appelli:</p>
     <table border="1">
         <tr>
