@@ -7,78 +7,95 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Area Studenti</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<%String matricola=(String)session.getAttribute("matricola");
+<%
+String matricola=(String)session.getAttribute("matricola");
 ResultSet res=(ResultSet) request.getAttribute("tabella_corso");
 ResultSet res1=(ResultSet) request.getAttribute("elenco_appelli");
 String materia=(String) request.getAttribute("materia");
-String messaggio = (String) request.getAttribute("successo");
+String messaggio = (String) request.getAttribute("successo"); // Questo è il messaggio di successo generico
 String data = (String) request.getAttribute("data");
 String materia2 = (String) request.getAttribute("materia2");
 %>
+
 <% if(matricola==null){
-	
-	response.sendRedirect("index.jsp");
+    response.sendRedirect("index.jsp");
 }
 %>
-<p>Benvenuto studente:<%=matricola %></p> 
-<a href="logout.jsp">logout</a>
-<% if(res!=null) {%>
-<table border=1>
-<tr>
-<th>ID corso</th>
-<th>materia</th>
-<th>nome docente</th>
-<th>cognome docente</th>
-</tr>
-<%
-while(res.next()){	
-%>
-<tr>
-<th><%=res.getInt("idcorso") %></th>
-<th><%=res.getString("materia") %></th>
-<th><%=res.getString("nome") %></th>
-<th><%=res.getString("cognome") %></th>
-<%} %>
-</tr>
-</table>
 
+<div class="top-right-info">
+    <span class="welcome-badge">Benvenuto studente: <%=matricola %></span>
+    <a href="logout.jsp" class="logout-link">logout</a>
+</div>
 
-<form action="Prenotazione" method="post">
-Inserisci la prenotazione che vuoi effettuare
-<input type="number" name="materia">
-<input type="submit" value="Prenota">
+<% if(messaggio!=null){%>
+    <p class="general-message">
+        <%=messaggio %>
+    </p>
 <%} %>
-</form>
 
-<% if(res1!=null) {%>
-<p>Per l'esame di <%=materia%> sono disponibili i seguenti appelli:</p>
-<table border=1>
-<tr>
-<th>ID Appello</th>
-<th>Data</th>
-</tr>
-<%
-while(res1.next()){	
-%>
-<tr>
-<th><%=res1.getInt(1)%></th>
-<th><%=res1.getDate("Data") %></th>
-<%} %>
-</tr>
-</table>
-<form action="Prenota" method="post">
-Inserisci la prenotazione che vuoi effettuare
-<input type="number" name="appello">
-<input type="submit" value="Prenota"></form>
-<%} %>
-<%if(messaggio!=null) %>
-<%=messaggio %>
+<div class="main-content-container">
 
-<%if(materia2!=null && data!=null){ %>
-<p> Prenotazione effettuata con successo in data <%=data %> per il corso <%=materia2 %></p>
-<%} %>
+    <% if(res!=null) {%>
+    <p class="section-title">Corsi disponibili:</p>
+    <table border="1">
+        <tr>
+            <th>ID corso</th>
+            <th>Materia</th>
+            <th>Nome Docente</th>
+            <th>Cognome Docente</th>
+        </tr>
+        <%
+        while(res.next()){
+        %>
+        <tr>
+            <td><%=res.getInt("idcorso") %></td>
+            <td><%=res.getString("materia") %></td>
+            <td><%=res.getString("nome") %></td>
+            <td><%=res.getString("cognome") %></td>
+        </tr>
+        <%} %>
+    </table>
+
+    <form action="Prenotazione" method="post" class="form-section">
+        <p>Inserisci l'ID del corso a cui vuoi iscriverti:</p>
+        <input type="number" name="materia" placeholder="ID Corso" required>
+        <input type="submit" value="Iscriviti al Corso">
+    </form>
+    <%} %>
+
+    <% if(res1!=null) {%>
+    <p class="section-title">Appelli disponibili per <%=materia%>:</p>
+    <table border="1">
+        <tr>
+            <th>ID Appello</th>
+            <th>Data</th>
+        </tr>
+        <%
+        while(res1.next()){
+        %>
+        <tr>
+            <td><%=res1.getInt(1)%></td>
+            <td><%=res1.getDate("Data") %></td>
+        </tr>
+        <%} %>
+    </table>
+    <form action="Prenota" method="post" class="form-section">
+        <p>Inserisci l'ID dell'appello a cui vuoi prenotarti:</p>
+        <input type="number" name="appello" placeholder="ID Appello" required>
+        <input type="submit" value="Prenota Appello">
+    </form>
+    <%} %>
+
+    <%-- Messaggio di conferma prenotazione specifica --%>
+    <%if(materia2!=null && data!=null){ %>
+    <p class="success-message">Prenotazione effettuata con successo in data <%=data %> per il corso "<%=materia2 %>".</p>
+    <%} %>
+
+</div> <%-- Chiusura di main-content-container --%>
+
 </body>
 </html>
