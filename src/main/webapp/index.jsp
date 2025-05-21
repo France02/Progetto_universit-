@@ -6,7 +6,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Benvenuto</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="style.css">
+=======
+<link href="css/style.css" rel="stylesheet" type="text/css">
+>>>>>>> 91fe4620df243abf89531b0087f4c6c7fbdec702
 </head>
 <body class="sfondo-pagina">
 <%
