@@ -6,7 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Benvenuto</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body background="https://www.investireoggi.it/economia/wp-content/uploads/sites/11/2018/01/universita-640x342.jpg" >
 <%
