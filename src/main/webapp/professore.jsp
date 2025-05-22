@@ -5,7 +5,7 @@ pageEncoding="ISO-8859-1"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Area Professore</title> <%-- Ho modificato il titolo per chiarezza --%>
+<title>Area Professore</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,27 +24,30 @@ String Data= (String)request.getAttribute("Data");
     response.sendRedirect("index.jsp");
 }
 %>
-<div class="top-right-info">
-    <span class="welcome-badge">Bentornato Professore: <%=nome%> <%=cognome%></span> <%-- Ho modificato il testo per chiarezza --%>
-    <a href="logout.jsp" class="logout-link">logout</a>
-</div>
+    <div class="page-header">
+        <div class="top-right-info">
+            <span class="welcome-badge">Bentornato Professore: <%=nome%> <%=cognome%></span>
+            <a href="logout.jsp" class="logout-link">logout</a>
+        </div>
 
-<%-- Questo è per il messaggio generico (se presente) che potresti voler stilizzare come 'general-message' --%>
-<%-- String messaggioGenerico = (String) request.getAttribute("messaggioGenerico");
-if(messaggioGenerico != null) { %>
-    <p class="general-message"><%= messaggioGenerico %></p>
-<% } --%>
-
-
-<div class="main-content-container">
+        <%-- Messaggio generico (se presente), ora correttamente posizionato sotto --%>
+        <% String messaggioGenerico = (String) request.getAttribute("messaggioGenerico");
+        if(messaggioGenerico != null && !messaggioGenerico.isEmpty()) { %>
+            <p class="general-message"><%= messaggioGenerico %></p>
+        <% } %>
+    </div>
+    <div class="main-content-container">
 
     <% if(appelli!=null){	%>
     <p class="section-title">Per la sua materia: "<%=materia %>" sono disponibili i seguenti appelli:</p>
     <table border="1">
-        <tr>
-            <th>ID Appello</th>
-            <th>Data</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>ID Appello</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
         <%
         while(appelli.next()){
         %>
@@ -52,23 +55,27 @@ if(messaggioGenerico != null) { %>
             <td><%=appelli.getInt(1)%></td>
             <td><%=appelli.getDate("Data") %></td>
         </tr>
-        <% }%> <%-- Chiusura corretta del while --%>
+        <% }%>
+        </tbody>
     </table>
     <form action="StampaStudenti" method="post" class="form-section">
         <p>Inserisci l'ID Appello per visualizzare gli studenti prenotati:</p>
         <input type="number" name="ID_appello" placeholder="ID Appello" required>
         <input type="submit" value="Visualizza Studenti">
     </form>
-    <% }%> <%-- Chiusura corretta dell'if(appelli!=null) --%>
+    <% }%>
 
     <% if(elenco!=null){%>
     <p class="section-title">Per l'esame di "<%=nomeMateria %>" in data <%=Data %> si sono prenotati i seguenti studenti:</p>
     <table border="1">
-        <tr>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Matricola</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Matricola</th>
+            </tr>
+        </thead>
+        <tbody>
         <%
         while(elenco.next()){
         %>
@@ -77,10 +84,11 @@ if(messaggioGenerico != null) { %>
             <td><%=elenco.getString("cognome")%></td>
             <td><%=elenco.getString("Matricola") %></td>
         </tr>
-        <% }%> <%-- Chiusura corretta del while --%>
+        <% }%>
+        </tbody>
     </table>
-    <% }%> <%-- Chiusura corretta dell'if(elenco!=null) --%>
+    <% }%>
 
-</div> <%-- Chiusura di main-content-container --%>
+</div>
 </body>
 </html>
