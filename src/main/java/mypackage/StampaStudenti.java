@@ -12,82 +12,71 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
-
-/**
- * Servlet implementation class StampaStudenti
- */
 @WebServlet("/StampaStudenti")
 public class StampaStudenti extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public StampaStudenti() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public StampaStudenti() {
+        super();
+    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String matricolaProfessoreString = (String) session.getAttribute("matricolaProfessore");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (matricolaProfessoreString == null) {
+            response.sendRedirect("index.jsp"); 
+            return;
+        }
 
-		String idAppello= request.getParameter("ID_appello");
-		Connection conn=Connessione.getCon();
+        Connection conn = null;
+        PreparedStatement pstmtAppelli = null;
+        PreparedStatement pstmtStudenti = null;
+        ResultSet rsAppelli = null;
+        ResultSet rsStudenti = null;
 
-		try {
-			/*PreparedStatement smt1=conn.prepareStatement("select stud_prenotato from prenotazione where app_prenotato=CAST(? AS UNSIGNED INTEGER)");
-			smt1.setString(1, idAppello);
-			ResultSet rs1=smt1.executeQuery();
-			while(rs1.next()) {
+        try {
+            conn = Connessione.getCon(); 
 
+            int matricolaProfessore = Integer.parseInt(matricolaProfessoreString);
 
-			String stud=rs1.getString(1);*/
-			PreparedStatement smt= conn.prepareStatement("select Materia,Data from appello where idAppello=CAST(? AS UNSIGNED INTEGER)");
-			smt.setString(1, idAppello);
-			ResultSet rs=smt.executeQuery();
-			rs.next();
-			String Materia= rs.getString("Materia");
-			String Data= rs.getString("Data");
-			PreparedStatement smt2= conn.prepareStatement("select Materia from corso where idcorso=CAST(? AS UNSIGNED INTEGER)");
-			smt2.setString(1, Materia);
-			ResultSet rs2= smt2.executeQuery();
-			rs2.next();
-			String nomeMateria= rs2.getString(1);
-			PreparedStatement smt1= conn.prepareStatement("select nome,cognome,Matricola from studente join (appello join prenotazione on CAST(? AS UNSIGNED INTEGER)=app_prenotato) on Matricola=stud_prenotato");
-			smt1.setString(1, idAppello);
-			ResultSet rs1=smt1.executeQuery();
-			RequestDispatcher rd= request.getRequestDispatcher("professore.jsp");
-			request.setAttribute("Materia",nomeMateria);
-			request.setAttribute("Data",Data);
-			request.setAttribute("elenco_studenti", rs1);
-			rd.forward(request, response);
+            String sqlAppelli = "SELECT A.idAppello, A.Data, C.Materia AS NomeMateriaCorso " + 
+                                "FROM appello A JOIN corso C ON A.Materia = C.idCorso " +
+                                "WHERE C.Cattedra = ?"; 
+            pstmtAppelli = conn.prepareStatement(sqlAppelli);
+            pstmtAppelli.setInt(1, matricolaProfessore); 
+            rsAppelli = pstmtAppelli.executeQuery();
+            request.setAttribute("elenco_appelli_prof", rsAppelli);
 
+            String sqlStudenti = "SELECT matricola, nome, cognome FROM studente";
+            pstmtStudenti = conn.prepareStatement(sqlStudenti);
+            rsStudenti = pstmtStudenti.executeQuery();
+            request.setAttribute("elenco_studenti", rsStudenti);
 
+            RequestDispatcher rd = request.getRequestDispatcher("professore.jsp");
+            rd.forward(request, response);
 
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            request.setAttribute("messaggioProfessore", "Errore interno: ID professore non valido.");
+            RequestDispatcher rd = request.getRequestDispatcher("professore.jsp");
+            rd.forward(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+            request.setAttribute("messaggioProfessore", "Errore di database: " + e.getMessage());
+            RequestDispatcher rd = request.getRequestDispatcher("professore.jsp"); 
+            rd.forward(request, response);
+        } finally {
+            try {
+            } catch (Exception e) { 
+                e.printStackTrace();
+            }
+        }
+    }
 
-
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-
-
-	}
-
-	
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response); 
+    }
 }

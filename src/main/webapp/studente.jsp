@@ -12,107 +12,115 @@
 <body>
 
 <%
-String matricola=(String)session.getAttribute("matricola");
-ResultSet res=(ResultSet) request.getAttribute("tabella_corso");
-ResultSet res1=(ResultSet) request.getAttribute("elenco_appelli");
-String materia=(String) request.getAttribute("materia");
-String messaggio = (String) request.getAttribute("successo"); // Questo è il messaggio di successo generico
-String data = (String) request.getAttribute("data");
-String materia2 = (String) request.getAttribute("materia2");
-String idcorso = null; // Inizializzato a null per evitare potenziali errori se non assegnato
+String nomeStudente = (String)session.getAttribute("nomeStudente"); 
+String matricolaStud = (String)session.getAttribute("matricolaStudente"); 
+ResultSet tabellaCorsi = (ResultSet) request.getAttribute("tabella_corso"); 
+String messaggioStud = (String) request.getAttribute("messaggioStudente"); 
 
-// Questo controllo deve essere fatto prima di usare 'matricola' per i dati utente
-if(matricola == null){
-    response.sendRedirect("index.jsp");
-    return; // Interrompi l'esecuzione per evitare errori se la sessione non esiste
+ResultSet elencoAppelli = (ResultSet) request.getAttribute("elenco_appelli");
+String materiaCorsoSelezionato = (String) request.getAttribute("materia"); 
+
+String messaggioPrenotazione = (String) request.getAttribute("messaggioPrenotazione"); 
+
+if(matricolaStud == null){ 
+    response.sendRedirect("index.jsp"); 
+    return;
 }
 %>
 
     <div class="page-header">
         <div class="top-right-info">
-            <span class="welcome-badge">Benvenuto studente: <%=matricola %></span>
-            <a href="logout.jsp" class="logout-link">logout</a>
+            <span class="welcome-badge">Benvenuto Stud. <%=nomeStudente != null ? nomeStudente : matricolaStud %></span>
+            <a href="index.jsp" class="logout-link">logout</a> 
         </div>
-
-        <%-- Messaggio generico (se presente), ora correttamente posizionato nel page-header --%>
-        <% if(messaggio != null && !messaggio.isEmpty()){%>
-            <p class="general-message">
-                <%=messaggio %>
-            </p>
-        <%} %>
+        <% if(messaggioStud != null && !messaggioStud.isEmpty()) { %>
+            <p class="general-message"><%= messaggioStud %></p>
+        <% } %>
     </div>
     <div class="main-content-container">
+    <% if(messaggioPrenotazione != null && !messaggioPrenotazione.isEmpty()) { %>
+        <p class="general-message" style="color: green;"><%= messaggioPrenotazione %></p>
+    <% } %>
 
-    <% if(res != null) {%>
-    <p class="section-title">Corsi disponibili:</p>
+    <p class="section-title">Corsi Disponibili:</p>
     <table border="1">
         <thead>
             <tr>
-                <th>ID corso</th>
+                <th>ID Corso</th>
                 <th>Materia</th>
-                <th>Nome Docente</th>
-                <th>Cognome Docente</th>
+                <th>Docente</th>
+                <th>Azione</th>
             </tr>
         </thead>
         <tbody>
         <%
-        String lastIdcorsoTable1 = null; // Variabile per tenere traccia dell'ultimo idcorso
-        while(res.next()){
+        boolean foundCourses = false;
+        if(tabellaCorsi != null) {
+            while(tabellaCorsi.next()){
+                foundCourses = true;
+                int idCorso = tabellaCorsi.getInt("idCorso"); 
+                String materia = tabellaCorsi.getString("Materia"); 
+                String nomeDocente = tabellaCorsi.getString("nome_docente");
+                String cognomeDocente = tabellaCorsi.getString("cognome_docente");
         %>
         <tr>
-            <td><%=res.getInt("idcorso") %></td>
-            <td><%=res.getString("materia") %></td>
-            <td><%=res.getString("nome") %></td>
-            <td><%=res.getString("cognome") %></td>
+            <td data-label="ID Corso"><%=idCorso%></td>
+            <td data-label="Materia"><%=materia%></td>
+            <td data-label="Docente"><%=nomeDocente%> <%=cognomeDocente%></td>
+            <td data-label="Azione">
+                <form action="Prenotazione" method="post" class="inline-form">
+                    <input type="hidden" name="idCorso" value="<%=idCorso%>">
+                    <input type="submit" value="Mostra Appelli" class="button-iscriviti-corso">
+                </form>
+            </td>
         </tr>
-        <% lastIdcorsoTable1 = String.valueOf(res.getInt("idcorso")); // Aggiorna l'ID corso per il max nel form
-        } %>
+        <% }
+        try { if (tabellaCorsi != null) tabellaCorsi.close(); } catch (SQLException e) { e.printStackTrace(); }
+        }
+        if (!foundCourses) { %>
+            <tr><td colspan="4" style="text-align: center;">Nessun corso disponibile.</td></tr>
+        <% } %>
         </tbody>
     </table>
-    <form action="Prenotazione" method="post" class="form-section">
-        <p>Inserisci l'ID del corso a cui vuoi iscriverti:</p>
-        <%-- Usa lastIdcorsoTable1 come valore massimo dinamico, se presente --%>
-        <input type="number" name="materia" placeholder="ID Corso" required min="1" <% if(lastIdcorsoTable1 != null) { %>max="<%=lastIdcorsoTable1%>"<% } %>>
-        <input type="submit" value="Iscriviti al Corso">
-    </form>
-    <%} %>
 
-    <% if(res1 != null) {%>
-    <p class="section-title">Appelli disponibili per <%=materia%>:</p>
+    <% if (elencoAppelli != null) { %>
+    <p class="section-title">Appelli disponibili per <%=materiaCorsoSelezionato != null ? materiaCorsoSelezionato : "il corso selezionato"%>:</p>
     <table border="1">
         <thead>
             <tr>
                 <th>ID Appello</th>
                 <th>Data</th>
+                <th>Materia</th>
+                <th>Azione</th>
             </tr>
         </thead>
         <tbody>
         <%
-        String lastIdAppelloTable2 = null; // Variabile per tenere traccia dell'ultimo id appello
-        while(res1.next()){
+        boolean foundAppelli = false;
+        while(elencoAppelli.next()){
+            foundAppelli = true;
         %>
         <tr>
-            <td><%=res1.getInt(1)%></td>
-            <td><%=res1.getDate("Data") %></td>
+            <td data-label="ID Appello"><%=elencoAppelli.getInt("idAppello")%></td>
+            <td data-label="Data"><%=elencoAppelli.getDate("Data") %></td>
+            <td data-label="Materia"><%=elencoAppelli.getString("NomeMateriaAssoc") %></td>
+            <td data-label="Azione">
+                <form action="Prenota" method="post" class="inline-form">
+                    <input type="hidden" name="idAppello" value="<%=elencoAppelli.getInt("idAppello")%>">
+                    <input type="submit" value="Prenota Appello" class="button-prenota-appello">
+                </form>
+            </td>
         </tr>
-        <% lastIdAppelloTable2 = String.valueOf(res1.getInt(1)); // Aggiorna l'ID appello per il max nel form
-        } %>
+        <% }
+        try { if (elencoAppelli != null) elencoAppelli.close(); } catch (SQLException e) { e.printStackTrace(); }
+        if (!foundAppelli) { %>
+            <tr><td colspan="4" style="text-align: center;">Nessun appello disponibile per questo corso.</td></tr>
+        <% } %>
         </tbody>
     </table>
-    <form action="Prenota" method="post" class="form-section">
-        <p>Inserisci l'ID dell'appello a cui vuoi prenotarti:</p>
-        <%-- Usa lastIdAppelloTable2 come valore massimo dinamico, se presente --%>
-        <input type="number" name="appello" placeholder="ID Appello" required min="1" <% if(lastIdAppelloTable2 != null) { %>max="<%=lastIdAppelloTable2%>"<% } %>>
-        <input type="submit" value="Prenota Appello">
-    </form>
-    <%} %>
+    <% } %>
 
-    <%-- Messaggio di conferma prenotazione specifica --%>
-    <%if(materia2!=null && data!=null){ %>
-    <p class="success-message">Prenotazione effettuata con successo in data <%=data%> per il corso "<%=materia2 %>".</p>
-    <%} %>
-
-</div> <%-- Chiusura di main-content-container --%>
+</div>
 
 </body>
 </html>

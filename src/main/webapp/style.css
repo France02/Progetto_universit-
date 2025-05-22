@@ -5,16 +5,14 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra orizzontalmente i contenitori principali */
-    justify-content: flex-start; /* Allinea in alto */
+    align-items: center;
+    justify-content: flex-start;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #333;
-    /* Spazio per l'header fisso */
-    padding-top: 80px; /* Altezza iniziale dell'header */
+    padding-top: 80px;
     box-sizing: border-box;
 }
 
-/* Stili per il contenitore del login (se questo CSS è usato anche per index.jsp) */
 .login-container {
     margin: 0;
     width: 350px;
@@ -27,13 +25,19 @@ body {
     margin-top: 50px;
 }
 
-/* Stili per i titoli H3 all'interno del login-container */
 .login-container h3 {
     color: #333;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
-/* Stili aggiuntivi per i campi input, per renderli più belli */
+.login-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
 .login-container input[type="text"],
 .login-container input[type="password"] {
     width: calc(100% - 24px);
@@ -42,6 +46,23 @@ body {
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
+}
+
+.login-container .radio-group {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-left: 5px;
+}
+
+.login-container .radio-group input[type="radio"] {
+    margin-right: 8px;
+}
+
+.login-container .radio-group label {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: normal;
+    color: #333;
 }
 
 .login-container input[type="submit"] {
@@ -53,6 +74,8 @@ body {
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 250px;
 }
 
 .login-container input[type="submit"]:hover {
@@ -64,39 +87,42 @@ body {
     transform: translateY(0);
 }
 
----
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
 
-/* --- Stili per l'HEADER DELLA PAGINA (page-header) --- */
 .page-header {
     width: 100%;
-    /* Posizionamento fisso in alto */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    /* Layout Flexbox per i suoi contenuti */
     display: flex;
-    flex-wrap: wrap; /* Permette agli elementi di andare a capo */
-    justify-content: space-between; /* Spinge gli elementi ai lati (top-right-info a destra, altri a sinistra) */
-    align-items: center; /* Centra verticalmente gli elementi */
-    padding: 10px 35px; /* Padding su tutti i lati, inclusi top e bottom */
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 35px;
     background: linear-gradient(to right, rgba(42,155,97,0.8) 0%,rgba(87,199,133,0.8) 50%,rgba(137,237,83,0.8) 100%);
     box-sizing: border-box;
-    min-height: 70px; /* Altezza minima, si espanderà se il contenuto va a capo */
+    min-height: 70px;
     z-index: 10;
 }
 
-
-/* --- Stili per le informazioni in Alto a Destra (Benvenuto, Logout) --- */
 .top-right-info {
-    /* NON SERVE PIÙ margin-left: auto qui perché justify-content: space-between fa il lavoro */
-    display: flex; /* Rende badge e link flex items */
-    align-items: center; /* Centra verticalmente badge e link */
-    gap: 15px; /* Spazio tra badge e link */
-    flex-wrap: wrap; /* Permette al badge e al link di andare a capo tra loro */
-    justify-content: flex-end; /* Allinea il contenuto interno di top-right-info (utile se va a capo) */
-    /* Order 2 per assicurarsi che vada a destra quando c'è spazio */
-    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-left: auto;
+    order: 1;
 }
 
 .welcome-badge {
@@ -141,26 +167,20 @@ body {
     transform: translateY(0);
 }
 
-/* Stili per il messaggio generico (se presente) */
 .general-message {
-    text-align: center; /* Centra il testo */
+    text-align: center;
     color: yellow;
     font-size: 20px;
     font-weight: bold;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
     z-index: 10;
     white-space: normal;
-    /* Margin auto per centrarlo se dovesse andare su una riga separata */
     margin: 0 auto;
-    /* Order 1 o 3 a seconda di come vogliamo che si posizioni rispetto a top-right-info */
-    order: 1; /* Di default a sinistra (o in alto se flex-wrap) */
-    flex-basis: 100%; /* Forza il messaggio a occupare tutta la larghezza disponibile e andare a capo */
-    padding-top: 10px; /* Spazio dal top-right-info se sono su righe diverse */
+    order: 2;
+    flex-basis: 100%;
+    padding-top: 10px;
 }
 
----
-
-/* --- Stili per il Contenitore Principale della Pagina --- */
 .main-content-container {
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
@@ -175,7 +195,6 @@ body {
     position: relative;
 }
 
-/* --- Stili per Titoli Sezione --- */
 .section-title {
     font-size: 1.6em;
     color: #444;
@@ -184,9 +203,8 @@ body {
     font-weight: 600;
 }
 
-/* --- Stili per Tabelle --- */
 .main-content-container table {
-    width: 100%; /* Ho cambiato 95% a 100% per allargare la tabella */
+    width: 100%;
     border-collapse: collapse;
     margin: 20px auto;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -197,6 +215,7 @@ body {
     border: 1px solid #e0e0e0;
     padding: 12px 15px;
     text-align: left;
+    white-space: normal;
 }
 
 .main-content-container th {
@@ -205,12 +224,44 @@ body {
     color: #555;
 }
 
-/* Questo rende tutte le righe della tabella bianche */
 .main-content-container tr {
     background-color: #FFFFFF;
 }
 
-/* --- Stili per Form --- */
+.inline-form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.button-prenota-appello,
+.button-iscriviti-corso,
+.button-visualizza-studenti {
+    background-color: #28a745; 
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+}
+
+.button-prenota-appello:hover,
+.button-iscriviti-corso:hover,
+.button-visualizza-studenti:hover {
+    background-color: #218838; 
+    transform: translateY(-1px);
+}
+
+.button-prenota-appello:active,
+.button-iscriviti-corso:active,
+.button-visualizza-studenti:active {
+    transform: translateY(0);
+}
+
 .form-section {
     background-color: rgba(245, 245, 245, 0.8);
     padding: 25px;
@@ -258,7 +309,6 @@ body {
     transform: translateY(0);
 }
 
-/* --- Stili per Messaggi di Successo (se usati) --- */
 .success-message {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #155724;
@@ -273,35 +323,27 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
----
-
-/* --- MEDIA QUERIES PER ADATTAMENTO SU SCHERMI PICCOLI (RESPONSIVITÀ) --- */
-{
 @media (max-width: 768px) {
     .page-header {
-        flex-direction: column; /* Impila gli elementi in colonna */
-        /* justify-content: flex-start; /* Rimuove space-between quando impila */
-        align-items: center; /* Centra orizzontalmente gli elementi impilati */
+        flex-direction: column;
+        align-items: center;
         padding: 15px 15px 5px 15px;
     }
-}
-
 
     .top-right-info {
-        /* Non serve margin-left: auto se justify-content: flex-end; è rimosso o modificato */
-        width: 100%; /* Occupa tutta la larghezza per centrare meglio */
-        justify-content: center; /* Centra badge e link all'interno di top-right-info */
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
     }
 
     .general-message {
-        padding-top: 10px; /* Spazio tra il badge e il messaggio */
-        order: 2; /* Sposta il messaggio sotto il top-right-info quando impilato */
-        flex-basis: auto; /* Rimuove la base 100% per un comportamento più fluido in colonna */
+        padding-top: 10px;
+        order: 2;
+        flex-basis: auto;
     }
 
-    /* Regola il padding-top del body per adattarsi all'altezza dell'header quando il contenuto va a capo */
     body {
-        padding-top: 120px; /* Questo valore potrebbe necessitare di piccole aggiustamenti */
+        padding-top: 120px;
     }
 
     .main-content-container {
@@ -315,15 +357,54 @@ body {
         font-size: 0.9em;
     }
 
+    .main-content-container table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .main-content-container thead,
+    .main-content-container tbody,
+    .main-content-container th,
+    .main-content-container td,
+    .main-content-container tr {
+        display: block;
+    }
+
+    .main-content-container thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .main-content-container tr {
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .main-content-container td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        content: attr(data-label);
+    }
+
     .form-section input[type="number"],
     .form-section input[type="text"] {
         max-width: 100%;
     }
-
+}
 
 @media (max-width: 480px) {
     body {
-        padding-top: 140px; /* Ancora più spazio per schermi molto piccoli */
+        padding-top: 140px;
     }
     .general-message {
         font-size: 16px;
@@ -335,4 +416,11 @@ body {
         font-size: 0.85em;
         padding: 4px 10px;
     }
-}}
+    .button-prenota-appello,
+    .button-iscriviti-corso,
+    .button-visualizza-studenti {
+        font-size: 0.8em;
+        padding: 6px 10px;
+        margin-bottom: 5px;
+    }
+}
