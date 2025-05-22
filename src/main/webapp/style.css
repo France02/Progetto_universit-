@@ -1,54 +1,51 @@
 body {
-    background: linear-gradient(to right,#2A9B61 0%,#57C785 50%,#89ED53 100%); /* Il gradiente che preferisci */
+    background: linear-gradient(to right,#2A9B61 0%,#57C785 50%,#89ED53 100%);
     min-height: 100vh;
     margin: 0;
-    padding: 20px; /* Lascia un padding generale per i bordi della pagina */
-    display: flex; /* Attiva Flexbox */
-    flex-direction: column; /* Organizza gli elementi in colonna */
-    align-items: center; /* Centra orizzontalmente gli elementi figli */
-    justify-content: center; /* Centra verticalmente gli elementi figli */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra orizzontalmente i contenitori principali */
+    justify-content: flex-start; /* Allinea in alto */
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #333;
+    /* Spazio per l'header fisso */
+    padding-top: 80px; /* Altezza iniziale dell'header */
+    box-sizing: border-box;
 }
 
-/* Stili per il contenitore del login */
+/* Stili per il contenitore del login (se questo CSS è usato anche per index.jsp) */
 .login-container {
-    /* Rimuovi i margini auto e i margini top/bottom che avevi impostato prima, Flexbox gestirà il centraggio */
-    margin: 0; /* Annulla i margini precedenti */
-
-    /* Definisci una larghezza per il contenitore */
-    width: 350px; /* Regola questa larghezza a tuo piacimento, un po' più grande forse */
-    max-width: 90%; /* Utile per schermi più piccoli, così non va oltre il 90% della larghezza */
-
-    /* Padding interno per dare "aria" al contenuto della form */
-    padding: 30px; /* Aumentato un po' il padding */
-
-    /* Stili per rendere il contenitore più visibile e gradevole */
-    background-color: rgba(255, 255, 255, 0.9); /* Sfondo quasi opaco */
-    border-radius: 12px; /* Bordi leggermente più arrotondati */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ombra più pronunciata per profondità */
-    text-align: center; /* Centra il testo all'interno del contenitore */
+    margin: 0;
+    width: 350px;
+    max-width: 90%;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-top: 50px;
 }
 
 /* Stili per i titoli H3 all'interno del login-container */
 .login-container h3 {
-    color: #333; /* Colore scuro per i titoli */
+    color: #333;
     margin-bottom: 15px;
 }
 
 /* Stili aggiuntivi per i campi input, per renderli più belli */
 .login-container input[type="text"],
 .login-container input[type="password"] {
-    width: calc(100% - 24px); /* Larghezza completa meno il padding (2*12px) */
+    width: calc(100% - 24px);
     padding: 12px;
-    margin-bottom: 20px; /* Spazio sotto ogni input, aumentato */
-    border: 1px solid #ddd; /* Bordo più chiaro */
-    border-radius: 6px; /* Bordi input leggermente arrotondati */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     font-size: 16px;
 }
 
 .login-container input[type="submit"] {
-    background-color: #4CAF50; /* Un bel verde */
+    background-color: #4CAF50;
     color: white;
     padding: 12px 25px;
     border: none;
@@ -59,7 +56,7 @@ body {
 }
 
 .login-container input[type="submit"]:hover {
-    background-color: #45a049; /* Verde leggermente più scuro al passaggio del mouse */
+    background-color: #45a049;
     transform: translateY(-2px);
 }
 
@@ -67,68 +64,61 @@ body {
     transform: translateY(0);
 }
 
-/* --- Stili per il Contenitore Principale della Pagina --- */
-.main-content-container {
-    background-color: rgba(255, 255, 255, 0.95); /* Sfondo bianco quasi opaco */
-    border-radius: 12px; /* Bordi arrotondati */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Ombra più pronunciata per profondità */
-    padding: 40px; /* Padding interno generoso */
-    margin: 20px auto; /* Centratura orizzontale con margini verticali */
-    max-width: 900px; /* Larghezza massima per il contenitore */
-    width: 90%; /* Larghezza responsiva */
-    box-sizing: border-box; /* Include padding e bordo nel calcolo della larghezza */
-    text-align: center; /* Centra il testo all'interno del contenitore */
-    z-index: 1; /* Assicura che sia sopra lo sfondo e sotto i popup */
-    position: relative; /* Per posizionamento figli assoluti */
+---
+
+/* --- Stili per l'HEADER DELLA PAGINA (page-header) --- */
+.page-header {
+    width: 100%;
+    /* Posizionamento fisso in alto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* Layout Flexbox per i suoi contenuti */
+    display: flex;
+    flex-wrap: wrap; /* Permette agli elementi di andare a capo */
+    justify-content: space-between; /* Spinge gli elementi ai lati (top-right-info a destra, altri a sinistra) */
+    align-items: center; /* Centra verticalmente gli elementi */
+    padding: 10px 35px; /* Padding su tutti i lati, inclusi top e bottom */
+    background: linear-gradient(to right, rgba(42,155,97,0.8) 0%,rgba(87,199,133,0.8) 50%,rgba(137,237,83,0.8) 100%);
+    box-sizing: border-box;
+    min-height: 70px; /* Altezza minima, si espanderà se il contenuto va a capo */
+    z-index: 10;
 }
 
-/* --- Stili per i Messaggi e Link in Alto a Destra --- */
-/* --- Stili per i Messaggi e Link in Alto a Destra --- */
-/* --- Stili per i Messaggi e Link in Alto a Destra --- */
+
+/* --- Stili per le informazioni in Alto a Destra (Benvenuto, Logout) --- */
 .top-right-info {
-    position: absolute;
-    top: 25px;
-    right: 35px;
-    text-align: right;
-    z-index: 10;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1.15em;
-    letter-spacing: 0.5px;
+    /* NON SERVE PIÙ margin-left: auto qui perché justify-content: space-between fa il lavoro */
+    display: flex; /* Rende badge e link flex items */
+    align-items: center; /* Centra verticalmente badge e link */
+    gap: 15px; /* Spazio tra badge e link */
+    flex-wrap: wrap; /* Permette al badge e al link di andare a capo tra loro */
+    justify-content: flex-end; /* Allinea il contenuto interno di top-right-info (utile se va a capo) */
+    /* Order 2 per assicurarsi che vada a destra quando c'è spazio */
+    order: 2;
 }
 
 .welcome-badge {
-    display: inline-block; /* Cruciale per permettere padding e bordi */
-    background-color: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente chiaro */
-    border: 1px solid rgba(255, 255, 255, 0.4); /* Bordo chiaro leggermente trasparente */
-    border-radius: 8px; /* Bordi arrotondati */
-    padding: 8px 15px; /* Spazio interno */
-    margin-right: 15px; /* Spazio tra il badge e il bottone di logout */
-    color: white; /* Colore del testo bianco */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Ombra per il testo per renderlo leggibile */
-    font-weight: 500; /* Peso medio del font */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Leggera ombra al badge */
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    padding: 8px 15px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.welcome-badge strong { /* Per la matricola all'interno del badge */
+.welcome-badge strong {
     font-weight: 700;
-    color: #fff; /* Bianco puro per la matricola */
-}
-
-.top-right-info p {
-    font-size: 1em; /* Assicura che il testo "Benvenuto studente" abbia questa dimensione */
-    font-weight: 500; /* Peso medio per il font */
-    margin: 0; /* Rimuove margini predefiniti */
-    padding-bottom: 5px; /* Un po' di spazio sotto il paragrafo */
-}
-
-.top-right-info p strong { /* Per la matricola in grassetto */
-    font-weight: 700; /* Più grassetto per la matricola */
-    color: #fff; /* Bianco puro per la matricola */
+    color: #fff;
 }
 
 .logout-link {
     display: inline-block;
-    color: #FFEB3B; /* Giallo brillante per il link di logout */
+    color: #FFEB3B;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95em;
@@ -151,19 +141,39 @@ body {
     transform: translateY(0);
 }
 
-.general-message { /* Messaggio generico (quello che era 'messaggio' in index.jsp) */
-    position: absolute;
-    top: 60px; /* Posizionato sotto l'info di logout */
-    left: 50%;
-    transform: translateX(-50%);
+/* Stili per il messaggio generico (se presente) */
+.general-message {
+    text-align: center; /* Centra il testo */
     color: yellow;
     font-size: 20px;
     font-weight: bold;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
     z-index: 10;
-    white-space: nowrap; /* Evita che il testo vada a capo se breve */
+    white-space: normal;
+    /* Margin auto per centrarlo se dovesse andare su una riga separata */
+    margin: 0 auto;
+    /* Order 1 o 3 a seconda di come vogliamo che si posizioni rispetto a top-right-info */
+    order: 1; /* Di default a sinistra (o in alto se flex-wrap) */
+    flex-basis: 100%; /* Forza il messaggio a occupare tutta la larghezza disponibile e andare a capo */
+    padding-top: 10px; /* Spazio dal top-right-info se sono su righe diverse */
 }
 
+---
+
+/* --- Stili per il Contenitore Principale della Pagina --- */
+.main-content-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    padding: 40px;
+    margin: 20px auto;
+    max-width: 900px;
+    width: 90%;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
 
 /* --- Stili per Titoli Sezione --- */
 .section-title {
@@ -176,10 +186,10 @@ body {
 
 /* --- Stili per Tabelle --- */
 .main-content-container table {
-    width: 95%; /* Leggermente più stretto per un po' di padding interno */
+    width: 95%;
     border-collapse: collapse;
-    margin: 20px auto; /* Centra la tabella e aggiunge margine */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Leggera ombra alla tabella */
+    margin: 20px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .main-content-container th,
@@ -195,21 +205,18 @@ body {
     color: #555;
 }
 
-.main-content-container tr:nth-child(even) { /* Righe pari con colore diverso */
-    background-color: #f2f2f2;
-}
-
-.main-content-container tr:hover { /* Effetto hover sulle righe */
-    background-color: #e8e8e8;
+/* Questo rende tutte le righe della tabella bianche */
+.main-content-container tr {
+    background-color: #FFFFFF;
 }
 
 /* --- Stili per Form --- */
 .form-section {
-    background-color: rgba(245, 245, 245, 0.8); /* Sfondo leggermente diverso per le form */
+    background-color: rgba(245, 245, 245, 0.8);
     padding: 25px;
     border-radius: 8px;
     margin-top: 30px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Ombra interna */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .form-section p {
@@ -220,18 +227,18 @@ body {
 }
 
 .form-section input[type="number"],
-.form-section input[type="text"] { /* Ho aggiunto text per generalizzare */
-    width: calc(100% - 40px); /* Regola larghezza */
+.form-section input[type="text"] {
+    width: calc(100% - 40px);
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1em;
-    max-width: 300px; /* Limita la larghezza massima dei campi input */
+    max-width: 300px;
 }
 
 .form-section input[type="submit"] {
-    background-color: #28a745; /* Bottone verde */
+    background-color: #28a745;
     color: white;
     padding: 12px 25px;
     border: none;
@@ -251,26 +258,78 @@ body {
     transform: translateY(0);
 }
 
-/* --- Stili per Messaggi di Successo --- */
+/* --- Stili per Messaggi di Successo (se usati) --- */
 .success-message {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #155724; /* Verde scuro per testo */
-    background-color: #d4edda; /* Sfondo verde chiaro */
+    color: #155724;
+    background-color: #d4edda;
     border: 1px solid #c3e6cb;
     border-radius: 8px;
     padding: 15px 25px;
     margin-top: 25px;
     font-size: 1.1em;
     font-weight: 600;
-    display: inline-block; /* Si adatta al contenuto */
+    display: inline-block;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* --- Rimuovi selettori non più usati o ridondanti --- */
-/* Le seguenti regole non sono più necessarie o sono state sostituite */
-/*
-p a { }
-.sfondo-pagina { }
-.login-container { }
-ecc.
-*/
+---
+
+/* --- MEDIA QUERIES PER ADATTAMENTO SU SCHERMI PICCOLI (RESPONSIVITÀ) --- */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column; /* Impila gli elementi in colonna */
+        /* justify-content: flex-start; /* Rimuove space-between quando impila */
+        align-items: center; /* Centra orizzontalmente gli elementi impilati */
+        padding: 15px 15px 5px 15px;
+    }
+
+    .top-right-info {
+        /* Non serve margin-left: auto se justify-content: flex-end; è rimosso o modificato */
+        width: 100%; /* Occupa tutta la larghezza per centrare meglio */
+        justify-content: center; /* Centra badge e link all'interno di top-right-info */
+    }
+
+    .general-message {
+        padding-top: 10px; /* Spazio tra il badge e il messaggio */
+        order: 2; /* Sposta il messaggio sotto il top-right-info quando impilato */
+        flex-basis: auto; /* Rimuove la base 100% per un comportamento più fluido in colonna */
+    }
+
+    /* Regola il padding-top del body per adattarsi all'altezza dell'header quando il contenuto va a capo */
+    body {
+        padding-top: 120px; /* Questo valore potrebbe necessitare di piccole aggiustamenti */
+    }
+
+    .main-content-container {
+        padding: 20px;
+        width: 95%;
+    }
+
+    .main-content-container th,
+    .main-content-container td {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    .form-section input[type="number"],
+    .form-section input[type="text"] {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 140px; /* Ancora più spazio per schermi molto piccoli */
+    }
+    .general-message {
+        font-size: 16px;
+    }
+    .welcome-badge {
+        font-size: 1em;
+    }
+    .logout-link {
+        font-size: 0.85em;
+        padding: 4px 10px;
+    }
+}
