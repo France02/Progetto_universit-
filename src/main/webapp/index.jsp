@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Accedi al Sistema</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
