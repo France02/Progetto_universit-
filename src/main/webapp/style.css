@@ -186,7 +186,7 @@ body {
 
 /* --- Stili per Tabelle --- */
 .main-content-container table {
-    width: 95%;
+    width: 100%; /* Ho cambiato 95% a 100% per allargare la tabella */
     border-collapse: collapse;
     margin: 20px auto;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -276,6 +276,7 @@ body {
 ---
 
 /* --- MEDIA QUERIES PER ADATTAMENTO SU SCHERMI PICCOLI (RESPONSIVITÀ) --- */
+{
 @media (max-width: 768px) {
     .page-header {
         flex-direction: column; /* Impila gli elementi in colonna */
@@ -283,6 +284,8 @@ body {
         align-items: center; /* Centra orizzontalmente gli elementi impilati */
         padding: 15px 15px 5px 15px;
     }
+}
+
 
     .top-right-info {
         /* Non serve margin-left: auto se justify-content: flex-end; è rimosso o modificato */
@@ -316,7 +319,7 @@ body {
     .form-section input[type="text"] {
         max-width: 100%;
     }
-}
+
 
 @media (max-width: 480px) {
     body {
@@ -332,4 +335,4 @@ body {
         font-size: 0.85em;
         padding: 4px 10px;
     }
-}
+}}

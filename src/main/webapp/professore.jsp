@@ -20,12 +20,11 @@ String nomeMateria = (String) request.getAttribute("Materia");
 String Data = (String) request.getAttribute("Data");
 %>
 
-<% if(nome == null && cognome == null){
+<%if(nome == null && cognome == null){
     response.sendRedirect("index.jsp");
-<<<<<<< HEAD
-}
-%>
-    <div class="page-header">
+}%>
+
+<div class="page-header">
         <div class="top-right-info">
             <span class="welcome-badge">Bentornato Professore: <%=nome%> <%=cognome%></span>
             <a href="logout.jsp" class="logout-link">logout</a>
@@ -43,8 +42,6 @@ String Data = (String) request.getAttribute("Data");
     <p class="section-title">Per la sua materia: "<%=materia %>" sono disponibili i seguenti appelli:</p>
     <table border="1">
         <thead>
-=======
-} %>
 
 <div class="top-right-info">
     <span class="welcome-badge">Bentornato Professore: <%= nome %> <%= cognome %></span>
@@ -66,13 +63,13 @@ String Data = (String) request.getAttribute("Data");
     <% if(appelli != null){ %>
         <p class="section-title">Per la sua materia: "<%= materia %>" sono disponibili i seguenti appelli:</p>
         <table border="1">
->>>>>>> 95206c6f7206d1742034df021e1c0a51f2db75b4
-            <tr>
+
+<tr>
                 <th>ID Appello</th>
                 <th>Data</th>
             </tr>
-<<<<<<< HEAD
-        </thead>
+
+</thead>
         <tbody>
         <%
         while(appelli.next()){
@@ -116,8 +113,8 @@ String Data = (String) request.getAttribute("Data");
     <% }%>
 
 </div>
-=======
-            <% while(appelli.next()){ %>
+
+<% while(appelli.next()){ %>
                 <tr>
                     <td><%= appelli.getInt(1) %></td>
                     <td><%= appelli.getDate("Data") %></td>
@@ -169,6 +166,6 @@ String Data = (String) request.getAttribute("Data");
 
 </div>
 
->>>>>>> 95206c6f7206d1742034df021e1c0a51f2db75b4
+
 </body>
 </html>
