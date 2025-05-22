@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Servlet implementation class Prenota
@@ -46,6 +48,9 @@ public class Prenota extends HttpServlet {
 		String appello = request.getParameter("appello");
 		String matricola=(String) session.getAttribute("matricola");
 		Connection conn= Connessione.getCon();
+		LocalDate dataCorrente = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataFormattata = dataCorrente.format(formatter);
 		try {
 			PreparedStatement smt2 = conn.prepareStatement("insert into prenotazione (stud_prenotato,app_prenotato) values (CAST(? AS UNSIGNED INTEGER),CAST(? AS UNSIGNED INTEGER))");
 			smt2.setString(1, matricola);
@@ -55,7 +60,7 @@ public class Prenota extends HttpServlet {
 			recuperoData.setString(1, appello);
 			ResultSet data=recuperoData.executeQuery();
 			data.next();
-			String dataScelta=data.getString(1);
+			String dataScelta=dataFormattata;
 			PreparedStatement recuperoMateria=conn.prepareStatement("select materia from corso where idcorso=CAST(? AS UNSIGNED INTEGER)");
 			recuperoMateria.setString(1, appello);
 			ResultSet materia=recuperoMateria.executeQuery();
