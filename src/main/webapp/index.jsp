@@ -4,40 +4,26 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Accedi al Sistema</title>
+<title>Campusnet Login</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="login-container">
-    <h3>Accedi al Sistema</h3>
-    
-    <% 
-        // Recupera e mostra eventuali messaggi di errore dal Servlet
-        String errorMessage = (String) request.getAttribute("messaggioErrore");
-        if (errorMessage != null && !errorMessage.isEmpty()) {
-            out.println("<p class='error-message'>" + errorMessage + "</p>");
-        }
-    %>
+    <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
 
-    <form action="login" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
-        
-        <div class="radio-group">
-            <input type="radio" id="professore" name="userType" value="professore" checked>
-            <label for="professore">Professore</label>
-            
-            <input type="radio" id="studente" name="userType" value="studente">
-            <label for="studente">Studente</label>
-        </div>
-        
-        <input type="submit" value="Accedi">
-    </form>
-</div>
+    <div class="login-form">
+        <h2>Accedi al Sistema</h2>
+        <% if (errorMessage != null && !errorMessage.isEmpty()) { %>
+            <p style="color: red;"><%= errorMessage %></p>
+        <% } %>
+        <form action="LoginServlet" method="post">
+            Username: <input type="text" name="username" required><br>
+            Password: <input type="password" name="password" required><br><br>
+            <input type="radio" name="tipoUtente" value="professore" checked> Professore
+            <input type="radio" name="tipoUtente" value="studente"> Studente<br><br>
+            <input type="submit" value="Accedi" class="button-login">
+        </form>
+    </div>
 
 </body>
 </html>

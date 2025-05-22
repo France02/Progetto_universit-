@@ -1,276 +1,338 @@
+/* Stile generale del corpo della pagina */
 body {
-    background: linear-gradient(to right,#2A9B61 0%,#57C785 50%,#89ED53 100%); /* Il gradiente che preferisci */
-    min-height: 100vh;
+    font-family: Arial, sans-serif; /* Font di default per tutta la pagina */
     margin: 0;
-    padding: 20px; /* Lascia un padding generale per i bordi della pagina */
-    display: flex; /* Attiva Flexbox */
-    flex-direction: column; /* Organizza gli elementi in colonna */
-    align-items: center; /* Centra orizzontalmente gli elementi figli */
-    justify-content: center; /* Centra verticalmente gli elementi figli */
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding: 0;
+    background-color: #f4f4f4;
     color: #333;
 }
 
-/* Stili per il contenitore del login */
-.login-container {
-    /* Rimuovi i margini auto e i margini top/bottom che avevi impostato prima, Flexbox gestirà il centraggio */
-    margin: 0; /* Annulla i margini precedenti */
-
-    /* Definisci una larghezza per il contenitore */
-    width: 350px; /* Regola questa larghezza a tuo piacimento, un po' più grande forse */
-    max-width: 90%; /* Utile per schermi più piccoli, così non va oltre il 90% della larghezza */
-
-    /* Padding interno per dare "aria" al contenuto della form */
-    padding: 30px; /* Aumentato un po' il padding */
-
-    /* Stili per rendere il contenitore più visibile e gradevole */
-    background-color: rgba(255, 255, 255, 0.9); /* Sfondo quasi opaco */
-    border-radius: 12px; /* Bordi leggermente più arrotondati */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ombra più pronunciata per profondità */
-    text-align: center; /* Centra il testo all'interno del contenitore */
-}
-
-/* Stili per i titoli H3 all'interno del login-container */
-.login-container h3 {
-    color: #333; /* Colore scuro per i titoli */
-    margin-bottom: 15px;
-}
-
-/* Stili aggiuntivi per i campi input, per renderli più belli */
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: calc(100% - 24px); /* Larghezza completa meno il padding (2*12px) */
-    padding: 12px;
-    margin-bottom: 20px; /* Spazio sotto ogni input, aumentato */
-    border: 1px solid #ddd; /* Bordo più chiaro */
-    border-radius: 6px; /* Bordi input leggermente arrotondati */
-    font-size: 16px;
-}
-
-.login-container input[type="submit"] {
-    background-color: #4CAF50; /* Un bel verde */
+/* Stile per l'header della pagina */
+.page-header {
+    background-color: #333;
     color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.login-container input[type="submit"]:hover {
-    background-color: #45a049; /* Verde leggermente più scuro al passaggio del mouse */
-    transform: translateY(-2px);
-}
-
-.login-container input[type="submit"]:active {
-    transform: translateY(0);
-}
-
-/* --- Stili per il Contenitore Principale della Pagina --- */
-.main-content-container {
-    background-color: rgba(255, 255, 255, 0.95); /* Sfondo bianco quasi opaco */
-    border-radius: 12px; /* Bordi arrotondati */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Ombra più pronunciata per profondità */
-    padding: 40px; /* Padding interno generoso */
-    margin: 20px auto; /* Centratura orizzontale con margini verticali */
-    max-width: 900px; /* Larghezza massima per il contenitore */
-    width: 90%; /* Larghezza responsiva */
-    box-sizing: border-box; /* Include padding e bordo nel calcolo della larghezza */
-    text-align: center; /* Centra il testo all'interno del contenitore */
-    z-index: 1; /* Assicura che sia sopra lo sfondo e sotto i popup */
-    position: relative; /* Per posizionamento figli assoluti */
-}
-
-/* --- Stili per i Messaggi e Link in Alto a Destra --- */
-/* --- Stili per i Messaggi e Link in Alto a Destra --- */
-/* --- Stili per i Messaggi e Link in Alto a Destra --- */
 .top-right-info {
-    position: absolute;
-    top: 25px;
-    right: 35px;
-    text-align: right;
-    z-index: 10;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1.15em;
-    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
 }
 
 .welcome-badge {
-    display: inline-block; /* Cruciale per permettere padding e bordi */
-    background-color: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente chiaro */
-    border: 1px solid rgba(255, 255, 255, 0.4); /* Bordo chiaro leggermente trasparente */
-    border-radius: 8px; /* Bordi arrotondati */
-    padding: 8px 15px; /* Spazio interno */
-    margin-right: 15px; /* Spazio tra il badge e il bottone di logout */
-    color: white; /* Colore del testo bianco */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Ombra per il testo per renderlo leggibile */
-    font-weight: 500; /* Peso medio del font */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Leggera ombra al badge */
-}
-
-.welcome-badge strong { /* Per la matricola all'interno del badge */
-    font-weight: 700;
-    color: #fff; /* Bianco puro per la matricola */
-}
-
-.top-right-info p {
-    font-size: 1em; /* Assicura che il testo "Benvenuto studente" abbia questa dimensione */
-    font-weight: 500; /* Peso medio per il font */
-    margin: 0; /* Rimuove margini predefiniti */
-    padding-bottom: 5px; /* Un po' di spazio sotto il paragrafo */
-}
-
-.top-right-info p strong { /* Per la matricola in grassetto */
-    font-weight: 700; /* Più grassetto per la matricola */
-    color: #fff; /* Bianco puro per la matricola */
+    background-color: #555;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 15px;
+    font-size: 0.9em;
 }
 
 .logout-link {
-    display: inline-block;
-    color: #FFEB3B; /* Giallo brillante per il link di logout */
+    color: #ffd700; /* Oro */
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95em;
-    padding: 5px 12px;
-    border: 1px solid #FFEB3B;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    background-color: rgba(255, 235, 59, 0.1);
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .logout-link:hover {
-    color: #6a11cb;
-    background-color: #FFEB3B;
-    text-decoration: none;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    color: #ffeb3b; /* Oro più chiaro all'hover */
 }
 
-.logout-link:active {
-    transform: translateY(0);
+/* Messaggi di stato o informazione */
+.general-message, .info-message {
+    background-color: #e0f2f7; /* Azzurro chiaro */
+    color: #01579b; /* Blu scuro */
+    padding: 10px;
+    margin: 10px 20px;
+    border-left: 5px solid #0288d1; /* Barra blu sul lato */
+    border-radius: 4px;
+    font-size: 0.95em;
 }
 
-.general-message { /* Messaggio generico (quello che era 'messaggio' in index.jsp) */
-    position: absolute;
-    top: 60px; /* Posizionato sotto l'info di logout */
-    left: 50%;
-    transform: translateX(-50%);
-    color: yellow;
-    font-size: 20px;
-    font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-    z-index: 10;
-    white-space: nowrap; /* Evita che il testo vada a capo se breve */
+/* Contenitore principale del contenuto */
+.main-content-container {
+    padding: 20px;
+    max-width: 1200px; /* Larghezza massima del contenuto */
+    margin: 20px auto; /* Centra il contenitore */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-/* --- Stili per Titoli Sezione --- */
 .section-title {
-    font-size: 1.6em;
-    color: #444;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    font-weight: 600;
+    font-size: 1.5em;
+    color: #0056b3; /* Blu per i titoli di sezione */
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
 }
 
-/* --- Stili per Tabelle --- */
-.main-content-container table {
-    width: 95%; /* Leggermente più stretto per un po' di padding interno */
+/* Stile per le tabelle */
+table {
+    width: 100%;
     border-collapse: collapse;
-    margin: 20px auto; /* Centra la tabella e aggiunge margine */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Leggera ombra alla tabella */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    background-color: #fff;
 }
 
-.main-content-container th,
-.main-content-container td {
-    border: 1px solid #e0e0e0;
-    padding: 12px 15px;
+table thead tr {
+    background-color: #4CAF50; /* Il tuo verde originale per l'intestazione */
+    color: white;
     text-align: left;
 }
 
-.main-content-container th {
-    background-color: #f8f8f8;
-    font-weight: bold;
-    color: #555;
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
 }
 
-.main-content-container tr:nth-child(even) { /* Righe pari con colore diverso */
-    background-color: #f2f2f2;
+table tbody tr:nth-child(even) {
+    background-color: #f8f8f8; /* Riga pari leggermente più scura */
 }
 
-.main-content-container tr:hover { /* Effetto hover sulle righe */
-    background-color: #e8e8e8;
+table tbody tr:hover {
+    background-color: #f1f1f1; /* Effetto hover sulle righe */
 }
 
-/* --- Stili per Form --- */
-.form-section {
-    background-color: rgba(245, 245, 245, 0.8); /* Sfondo leggermente diverso per le form */
-    padding: 25px;
+/* Stile per i pulsanti */
+/* Questi sono i bottoni che avevi, inclusi quelli che non prendevano il colore
+   perché non avevano classi specifiche come .button-iscriviti-corso o .button-login. */
+input[type="submit"],
+.button-iscriviti-corso,
+.button-prenota-appello,
+.button-login {
+    background-color: #4CAF50; /* Il tuo verde originale per i bottoni */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 0;
+    /* Reset di base per evitare stili predefiniti del browser */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.button-iscriviti-corso:hover,
+.button-prenota-appello:hover,
+.button-login:hover {
+    background-color: #45a049; /* Verde più scuro all'hover */
+}
+
+/* Stile per i form in linea (usati nelle tabelle per i bottoni) */
+.inline-form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Stile per il modulo di login */
+.login-form {
+    background-color: #fff;
+    padding: 30px;
     border-radius: 8px;
-    margin-top: 30px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Ombra interna */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
 }
 
-.form-section p {
-    font-size: 1.1em;
-    color: #555;
-    margin-bottom: 15px;
-    font-weight: 500;
+.login-form h2 {
+    color: #4CAF50; /* Verde per il titolo del login */
+    margin-bottom: 25px;
+    font-size: 1.8em;
 }
 
-.form-section input[type="number"],
-.form-section input[type="text"] { /* Ho aggiunto text per generalizzare */
-    width: calc(100% - 40px); /* Regola larghezza */
-    padding: 12px;
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 4px;
     font-size: 1em;
-    max-width: 300px; /* Limita la larghezza massima dei campi input */
+    box-sizing: border-box;
 }
 
-.form-section input[type="submit"] {
-    background-color: #28a745; /* Bottone verde */
+.login-form input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    background-color: #4CAF50; /* Verde per il bottone "Accedi" */
     color: white;
-    padding: 12px 25px;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
-.form-section input[type="submit"]:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
+.login-form input[type="submit"]:hover {
+    background-color: #45a049; /* Verde più scuro */
 }
 
-.form-section input[type="submit"]:active {
-    transform: translateY(0);
+/* Stile per le liste (usate per gli studenti prenotati) */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
 }
 
-/* --- Stili per Messaggi di Successo --- */
-.success-message {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #155724; /* Verde scuro per testo */
-    background-color: #d4edda; /* Sfondo verde chiaro */
-    border: 1px solid #c3e6cb;
-    border-radius: 8px;
-    padding: 15px 25px;
-    margin-top: 25px;
-    font-size: 1.1em;
-    font-weight: 600;
-    display: inline-block; /* Si adatta al contenuto */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ul li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-/* --- Rimuovi selettori non più usati o ridondanti --- */
-/* Le seguenti regole non sono più necessarie o sono state sostituite */
-/*
-p a { }
-.sfondo-pagina { }
-.login-container { }
-ecc.
-*/
+ul li:last-child {
+    border-bottom: none;
+}
+
+
+/* Stili responsivi (media queries) */
+@media screen and (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .top-right-info {
+        margin-top: 10px;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .welcome-badge {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .logout-link {
+        margin-top: 5px;
+    }
+
+    .main-content-container {
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    .section-title {
+        font-size: 1.3em;
+        text-align: center;
+    }
+
+    /* Tabelle responsive (card-like layout) */
+    table, table tbody, table tr, table td {
+        display: block;
+        width: 100%;
+    }
+
+    table thead {
+        display: none; /* Nasconde l'intestazione su schermi piccoli */
+    }
+
+    table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border: none;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: calc(50% - 30px);
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #555;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Allineamento dei pulsanti nelle celle responsive */
+    table td:has(form) {
+        text-align: center;
+        padding-left: 0;
+        position: static;
+    }
+
+    table td:has(form)::before {
+        display: none;
+    }
+
+    .inline-form {
+        width: auto;
+        display: block;
+        margin: 5px auto;
+    }
+
+    input[type="submit"] {
+        width: auto;
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    /* Stile per i campi di input nel login form su schermi piccoli */
+    .login-form {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: calc(100% - 20px);
+        font-size: 0.9em;
+    }
+
+    .login-form input[type="submit"] {
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    ul li {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+}
+
+/* Media query per schermi ancora più piccoli (telefoni molto stretti) */
+@media screen and (max-width: 480px) {
+    .main-content-container {
+        padding: 10px;
+    }
+
+    table td {
+        padding-left: 45%;
+    }
+
+    table td::before {
+        width: calc(45% - 20px);
+    }
+}
