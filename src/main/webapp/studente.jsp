@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Area Studenti</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -31,8 +31,8 @@ if(matricolaStud == null){
     <div class="page-header">
         <div class="top-right-info">
             <span class="welcome-badge">Benvenuto Stud. <%=nomeStudente != null ? nomeStudente : matricolaStud %></span>
+            <a href="modifica_profilo.jsp" class="logout-link">Impostazioni</a> 
             <a href="index.jsp" class="logout-link">logout</a> 
-            <a href="modifica_profilo.jsp" class="settings-link">Impostazioni</a> 
         </div>
         <% if(messaggioStud != null && !messaggioStud.isEmpty()) { %>
             <p class="general-message"><%= messaggioStud %></p>

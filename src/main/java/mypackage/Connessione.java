@@ -13,7 +13,6 @@ public class Connessione {
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/universita","root","root");
-
 			System.out.println("Connesso");
 		}catch(ClassNotFoundException | SQLException e)
 		{
